@@ -1,10 +1,7 @@
 package com.rhdes.covid.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.concurrent.atomic.AtomicLong;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class User {
@@ -15,6 +12,8 @@ public class User {
 	private String name;
 	private double lat;
 	private double lon;
+	@OneToMany(mappedBy="userId", cascade = CascadeType.ALL)
+	private List<Post> userCase;
 
 	public String getName() {
 		return name;
@@ -46,5 +45,13 @@ public class User {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public List<Post> getUserCase() {
+		return userCase;
+	}
+
+	public void setUserCase(List<Post> userCase) {
+		this.userCase = userCase;
 	}
 }
